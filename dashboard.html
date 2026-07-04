@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movilnet - Dashboard de Entregas</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        movilnet: {
+                            orange: '#FF6600',
+                            dark: '#1e1e1e',
+                            gray: '#f4f4f6',
+                            textDark: '#2d2d2d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Alpine.js para interactividad en filtros y modales -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-movilnet-gray min-h-screen flex flex-col font-sans antialiased" x-data="{ notification: false, notifMessage: '' }">
+
+    <!-- Barra de Navegación Superior -->
+     <nav class="bg-white shadow-md flex justify-between items-center px-6 md:px-12 py-4 sticky top-0 z-50">
+        <!-- Logo simulado (Movilnet suele ir en minúsculas) -->
+        <div class="text-3xl font-extrabold text-[#00A3E0] tracking-tighter">
+           <a href="index.html">
+                <img src="./assets/descarga (18).jfif" alt="logo movilnet" class="h-20 w-auto">
+            </a>
+        </div>
+        
+        <!-- Enlace de navegación solicitado -->
+      <div class="flex items-center space-x-4">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs text-black-800">Supervisor / Gerente</p>
+                    <p class="text-sm font-medium text-black-800">Panel de Control General</p>
+                </div>
+                <div class="h-8 w-8 rounded-full bg-movilnet-orange flex items-center justify-center font-bold text-white">
+                    G
+                </div>
+            </div>
+        </div>
+    
+        </div>
+    </nav>
+
+            
+            <!-- Info del Gerente Autenticado (CU-01 / ACT-02) -->
+            
+
+    <!-- Notificación Flotante de Éxito (CU-06) -->
+    <div x-show="notification" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform translate-y-2 sm:translate-y-0 sm:translate-x-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0 sm:translate-x-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform translate-y-0"
+         x-transition:leave-end="opacity-0 transform translate-y-2"
+         class="fixed bottom-5 right-5 z-50 bg-movilnet-dark text-white border-l-4 border-green-500 p-4 rounded-lg shadow-xl max-w-sm flex items-center space-x-3"
+         style="display: none;">
+        <svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-sm font-medium" x-text="notifMessage"></span>
+    </div>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow items-center justify-center max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+        
+        <!-- Encabezado del Dashboard -->
+        <div class=" items-center justify-center sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h1 class="text-2xl  font-bold text-movilnet-textDark flex items-center justify-center gap-2">
+                    <svg class="w-7 h-7 text-movilnet-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                   Dashboard de Control de Entregas
+                </h1>
+                <p class="text-sm text-center text-black-800 mt-0.5">Monitoreo centralizado, búsqueda y auditoría de reportes técnicos institucionales.</p>
+            </div>
+            
+          
+        </div>
+
+        <!-- Tarjeta central de Indicadores -->
+        <div class="grid place-items-center">
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm w-full max-w-lg text-center">
+                <div class="inline-flex items-center justify-center mb-4 w-16 h-16 rounded-full bg-purple-50 text-purple-600 mx-auto">
+                    <svg class="w-7 h-7 text-movilnet-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total de Entregas</p>
+                <h3 class="text-4xl font-bold text-movilnet-textDark mt-3">144</h3>
+                <p class="text-sm text-gray-500 mt-2">Número total de entregas realizadas.</p>
+            </div>
+        </div>
+
+        <!-- Bloque de Filtros Avanzados (RF-05 / CU-05) -->
+        <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+            <h2 class="text-sm font-bold text-movilnet-textDark mb-3 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-movilnet-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+                Filtros del Sistema de Búsqueda
+            </h2>
+            
+            <form action="#" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <!-- Búsqueda por Texto Libre -->
+                <div>
+                    <label for="search_text" class="block text-xs font-semibold text-gray-500 mb-1">Título o Palabra clave</label>
+                    <input type="text" id="search_text" name="titulo" 
+                           class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-movilnet-orange focus:border-transparent transition text-xs"
+                           placeholder="Ej. Radiobase, Incidencia...">
+                </div>
+
+                <!-- Filtrar por Gerencia -->
+                <div>
+                    <label for="filter_gerencia" class="block text-xs font-semibold text-gray-500 mb-1">Gerencia Emisora</label>
+                    <select id="filter_gerencia" name="gerencia" 
+                            class="w-full px-3 py-1.5 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-movilnet-orange focus:border-transparent transition text-xs">
+                        <option value="">Todas las Dependencias</option>
+                        <option value="gerencia_general">Gerencia General de Entornos</option>
+                        <option value="analisis_entornos">Gerencia de Análisis de Entornos</option>
+                        <option value="coordinacion_ti">Coordinación de Investigaciones TI</option>
+                    </select>
+                </div>
+
+                <!-- Filtrar por Categoría -->
+                <div>
+                    <label for="filter_categoria" class="block text-xs font-semibold text-gray-500 mb-1">Clasificación / Categoría</label>
+                    <select id="filter_categoria" name="categoria" 
+                            class="w-full px-3 py-1.5 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-movilnet-orange focus:border-transparent transition text-xs">
+                        <option value="">Todas las Categorías</option>
+                        <option value="Reporte de Entorno">Reporte de Entorno</option>
+                        <option value="Reporte de Estrategias">Reporte de Estrategias</option>
+                        <option value="Control de Incidencias">Control de Incidencias</option>
+                        <option value="Indicadores">Indicadores</option>
+                    </select>
+                </div>
+
+                <!-- Filtrar por Fecha -->
+                <div>
+                    <label for="filter_date" class="block text-xs font-semibold text-gray-500 mb-1">Fecha de Entrega</label>
+                    <input type="date" id="filter_date" name="fecha"
+                           class="w-full px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-movilnet-orange focus:border-transparent transition text-xs">
+                </div>
+            </form>
+        </div>
+
+        <!-- Sección de Listado de Reportes y Tabla Principal (RF-04 / RF-06) -->
+        <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-gray-100 flex items-center justify-between bg-neutral-50">
+                <h2 class="text-sm font-bold text-movilnet-textDark">Últimos Reportes Técnicos Registrados</h2>
+                <span class="bg-orange-100 text-movilnet-orange text-[10px] font-bold px-2 py-0.5 rounded-full">Actualizado en Tiempo Real</span>
+            </div>
+
+            <!-- Tabla Adaptativa -->
+            <div >
+                <table class="w-full min-w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-movilnet-dark text-white text-xs uppercase tracking-wider">
+                            <th class="py-3 px-4 font-semibold">ID</th>
+                            <th class="py-3 px-4 font-semibold">Fecha de Entrega</th>
+                            <th class="py-3 px-4 font-semibold">Gerencia Emisora</th>
+                            <th class="py-3 px-4 font-semibold">Categoría</th>
+                            <th class="py-3 px-4 font-semibold">Título</th>
+                            <th class="py-3 px-4 font-semibold text-center">Descarga</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-xs divide-y divide-gray-100 text-movilnet-textDark">
+                        
+                        <!-- Registro 1: Pendiente -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="py-3.5 px-4 font-bold text-gray-400">#REP-0142</td>
+                            <td class="py-3.5 px-4 text-gray-500">2026-07-02 08:30</td>
+                            <td class="py-3.5 px-4 text-gray-500">Gerencia de Operaciones</td>
+                            <td class="py-3.5 px-4 text-gray-500">Mantenimiento</td>
+                            <td class="py-3.5 px-4 text-gray-500">Reporte de Fallas en Red</td>
+                            <td class="py-3.5 px-4 text-center">
+                                <button @click="notifMessage = 'Descarga de archivo #0142 iniciada.'; notification = true; setTimeout(() => notification = false, 3000)"
+                                        class="inline-flex items-center justify-center p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-movilnet-orange hover:text-white transition"
+                                        title="Descargar archivo">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-7-9v6m0 0l-3-3m3 3l3-3m-3-6v6" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Registro 2: Evaluado -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="py-3.5 px-4 font-bold text-gray-400">#REP-0141</td>
+                            <td class="py-3.5 px-4 text-gray-500">2026-06-29 14:15</td>
+                            <td class="py-3.5 px-4 text-gray-500">Gerencia de Operaciones</td>
+                            <td class="py-3.5 px-4 text-gray-500">Mantenimiento</td>
+                            <td class="py-3.5 px-4 text-gray-500">Reporte de Fallas en Red</td>
+                            <td class="py-3.5 px-4 text-center">
+                                <button @click="notifMessage = 'Descarga de archivo #0141 iniciada.'; notification = true; setTimeout(() => notification = false, 3000)"
+                                        class="inline-flex items-center justify-center p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-movilnet-orange hover:text-white transition"
+                                        title="Descargar archivo">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-7-9v6m0 0l-3-3m3 3l3-3m-3-6v6" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Registro 3: Evaluado -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="py-3.5 px-4 font-bold text-gray-400">#REP-0140</td>
+                            <td class="py-3.5 px-4 text-gray-500">2026-06-25 11:00</td>
+                            <td class="py-3.5 px-4 text-gray-500">Gerencia de Operaciones</td>
+                            <td class="py-3.5 px-4 text-gray-500">Mantenimiento</td>
+                            <td class="py-3.5 px-4 text-gray-500">Reporte de Fallas en Red</td>
+                            <td class="py-3.5 px-4 text-center">
+
+                                <button @click="notifMessage = 'Descarga de archivo #0140 iniciada.'; notification = true; setTimeout(() => notification = false, 3000)"
+                                        class="inline-flex items-center justify-center p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-movilnet-orange hover:text-white transition"
+                                        title="Descargar archivo">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-7-9v6m0 0l-3-3m3 3l3-3m-3-6v6" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación de la Tabla -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+                <p>Mostrando <span class="font-semibold text-movilnet-textDark">1 a 3</span> de <span class="font-semibold text-movilnet-textDark">142</span> reportes</p>
+                <div class="inline-flex space-x-1">
+                    <button class="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-100 disabled:opacity-50" disabled>Anterior</button>
+                    <button class="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-100 font-bold text-movilnet-orange">1</button>
+                    <button class="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-100">2</button>
+                    <button class="px-2 py-1 border border-gray-300 rounded bg-white hover:bg-gray-100">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de Página Informativo -->
+    <footer class="bg-movilnet-dark text-gray-500 text-xs py-4 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-1">
+            <p>&copy; 2026 Movilnet - Gerencia General de Entornos y Estrategias[cite: 1].</p>
+            <p class="text-gray-600">Desarrollado en Alianza Académica con la UNETI[cite: 1].</p>
+        </div>
+    </footer>
+
+</body>
+</html>
