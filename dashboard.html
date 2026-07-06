@@ -157,21 +157,27 @@
 
         <!-- Sección de Listado de Reportes y Tabla Principal (RF-04 / RF-06) -->
         <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-            <div class="p-5 border-b border-gray-100 flex items-center justify-between bg-neutral-50">
-                <h2 class="text-sm font-bold text-movilnet-textDark">Últimos Reportes Técnicos Registrados</h2>
-                <span class="bg-orange-100 text-movilnet-orange text-[10px] font-bold px-2 py-0.5 rounded-full">Actualizado en Tiempo Real</span>
+            <div class="p-5 border-b border-gray-100 flex items-center justify-evenly bg-neutral-50">
+                <h2 class="text-sm font-bold text-movilnet-textDark hidden sm:block">Últimos Reportes Técnicos Registrados</h2>
+                 <div class="flex gap-2 w-full sm:w-auto mt-2 sm:mt-0 sm:flex-row">
+                            <button type="submit" 
+                                    class="flex-1 w-full bg-movilnet-orange hover:bg-orange-600 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition shadow-sm text-center">
+                                Filtrar Reportes
+                            </button>
+                           
+                        </div>    
             </div>
 
             <!-- Tabla Adaptativa -->
-            <div >
+            <form >
                 <table class="w-full min-w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-movilnet-dark text-white text-xs uppercase tracking-wider">
                             <th class="py-3 px-4 font-semibold">ID</th>
-                            <th class="py-3 px-4 font-semibold">Fecha de Entrega</th>
-                            <th class="py-3 px-4 font-semibold">Gerencia Emisora</th>
-                            <th class="py-3 px-4 font-semibold">Categoría</th>
-                            <th class="py-3 px-4 font-semibold">Título</th>
+                            <th class="py-3 px-4 font-semibold hidden sm:table-cell">Fecha de Entrega</th>
+                            <th class="py-3 px-4 font-semibold hidden sm:table-cell ">Gerencia Emisora</th>
+                            <th class="py-3 px-4 font-semibold hidden sm:table-cell">Categoría</th>
+                            <th class="py-3 px-4 font-semibold " >Título</th>
                             <th class="py-3 px-4 font-semibold text-center">Descarga</th>
                         </tr>
                     </thead>
@@ -180,10 +186,10 @@
                         <!-- Registro 1: Pendiente -->
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-3.5 px-4 font-bold text-gray-400">#REP-0142</td>
-                            <td class="py-3.5 px-4 text-gray-500">2026-07-02 08:30</td>
-                            <td class="py-3.5 px-4 text-gray-500">Gerencia de Operaciones</td>
-                            <td class="py-3.5 px-4 text-gray-500">Mantenimiento</td>
-                            <td class="py-3.5 px-4 text-gray-500">Reporte de Fallas en Red</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">2026-07-02 08:30</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">Gerencia de Operaciones</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">Mantenimiento</td>
+                            <td class="py-3.5 px-4 text-gray-500 ">Reporte de Fallas en Red</td>
                             <td class="py-3.5 px-4 text-center">
                                 <button @click="notifMessage = 'Descarga de archivo #0142 iniciada.'; notification = true; setTimeout(() => notification = false, 3000)"
                                         class="inline-flex items-center justify-center p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-movilnet-orange hover:text-white transition"
@@ -198,10 +204,10 @@
                         <!-- Registro 2: Evaluado -->
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-3.5 px-4 font-bold text-gray-400">#REP-0141</td>
-                            <td class="py-3.5 px-4 text-gray-500">2026-06-29 14:15</td>
-                            <td class="py-3.5 px-4 text-gray-500">Gerencia de Operaciones</td>
-                            <td class="py-3.5 px-4 text-gray-500">Mantenimiento</td>
-                            <td class="py-3.5 px-4 text-gray-500">Reporte de Fallas en Red</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">2026-06-29 14:15</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">Gerencia de Operaciones</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">Mantenimiento</td>
+                            <td class="py-3.5 px-4 text-gray-500 ">Reporte de Fallas en Red</td>
                             <td class="py-3.5 px-4 text-center">
                                 <button @click="notifMessage = 'Descarga de archivo #0141 iniciada.'; notification = true; setTimeout(() => notification = false, 3000)"
                                         class="inline-flex items-center justify-center p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-movilnet-orange hover:text-white transition"
@@ -216,10 +222,10 @@
                         <!-- Registro 3: Evaluado -->
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-3.5 px-4 font-bold text-gray-400">#REP-0140</td>
-                            <td class="py-3.5 px-4 text-gray-500">2026-06-25 11:00</td>
-                            <td class="py-3.5 px-4 text-gray-500">Gerencia de Operaciones</td>
-                            <td class="py-3.5 px-4 text-gray-500">Mantenimiento</td>
-                            <td class="py-3.5 px-4 text-gray-500">Reporte de Fallas en Red</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">2026-06-25 11:00</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">Gerencia de Operaciones</td>
+                            <td class="py-3.5 px-4 text-gray-500 hidden sm:table-cell">Mantenimiento</td>
+                            <td class="py-3.5 px-4 text-gray-500 ">Reporte de Fallas en Red</td>
                             <td class="py-3.5 px-4 text-center">
 
                                 <button @click="notifMessage = 'Descarga de archivo #0140 iniciada.'; notification = true; setTimeout(() => notification = false, 3000)"
@@ -231,9 +237,10 @@
                                 </button>
                             </td>
                         </tr>
-
+                       
                     </tbody>
                 </table>
+                </form>
             </div>
 
             <!-- Paginación de la Tabla -->
